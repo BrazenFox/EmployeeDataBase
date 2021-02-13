@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Emplpoyee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'First name: ' + ${employee.firstName}" />
+<p th:text="'Middle name: ' + ${employee.middleName}" />
+<p th:text="'Last name: ' + ${employee.lastName}" />
+<p th:text="'Age: ' + ${employee.age}" />
+<p th:text="'Salary: ' + ${employee.salary}" />
+<p th:text="'Email: ' + ${employee.email}" />
+<p th:text="'Telephone: ' + ${employee.telephone}" />
+<p th:text="'Department: ' + ${employee.department}" />
+<p th:if="${employee.userAgent}" th:text="'User Agent: ' + ${employee.userAgent}" />
+<!--<p th:href="/email?">Написать email</p>-->
+<form th:action="@{/email}">
+    <button type="submit" th:name="email" th.text = "Send Email" th:value="${employee.email}">Send Email</button>
+</form>
+<a href="/">Go to start page</a>
+</body>
+</html>

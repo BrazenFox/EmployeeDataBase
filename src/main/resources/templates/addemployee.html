@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Employee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/addemployee}" th:object="${employee}" method="post">
+    <p>First name: <input type="text" name="name" placeholder="first name" pattern="[a-zA-Zа-яА-Я]{2,}" required th:field="*{firstName}" /></p>
+    <p>Middle name: <input type="text" name="name" placeholder="middle name" pattern="[a-zA-Zа-яА-Я]{2,}" required th:field="*{middleName}" /></p>
+    <p>Last name: <input type="text" name="name" placeholder="last name" pattern="[a-zA-Zа-яА-Я]{2,}" required th:field="*{lastName}" /></p>
+    <p>Age: <input type="number" name="growth" placeholder="age" min="18" max="120" th:field="*{age}" /></p>
+    <p>Salary: <input type="number" name="growth" placeholder="salary" min="10000" th:field="*{salary}" />
+    <p>Telephone:  +9 (999) 999-99-99 <input type="tel" name="phone" placeholder="telephone" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" th:field="*{telephone}" /> <!-- pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="18" maxlength="18" -->
+    <p>E-mail: <input type="text" name="email" placeholder="E-Mail" required th:field="*{email}" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" /></p> <!-- pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" -->
+    <p>Department: <input type="text" name="name" placeholder="department" pattern="[a-zA-Zа-яА-Я]{2,}" required th:field="*{department}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+<h2>Upload File</h2>
+<!--<p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>-->
+<form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" name="file" class="form-control-file">
+    </div>
+    <button type="submit" name="Upload" class="btn btn-primary">Upload File</button>
+</form>
+
+<a href="/">Go to start page</a>
+
+</body>
+</html>
