@@ -71,7 +71,7 @@ public class EmployeeDataBaseController {
 
 
     @PostMapping("/addemployee")
-    public String addEmployeePost(@ModelAttribute Employee employee){
+    public String addEmployeePost(@ModelAttribute Employee employee) {
         dataBase.addEmployee(employee);
         return "employee";
     }
@@ -95,15 +95,17 @@ public class EmployeeDataBaseController {
         }
         System.out.println(textBuilder.toString());
         String[] param = textBuilder.toString().split("\\|");
-        return "redirect:/addemployee?" +
-                "firstname=" + param[0] +
-                "&middlename=" + param[1] +
-                "&lastname=" + param[2] +
-                "&age=" + param[3] +
-                "&salary=" + param[4] +
-                "&email=" + param[5] +
-                "&telephone=" + param[6] +
-                "&department=" + param[7];
+        if (param.length == 8) {
+            return "redirect:/addemployee?" +
+                    "firstname=" + param[0] +
+                    "&middlename=" + param[1] +
+                    "&lastname=" + param[2] +
+                    "&age=" + param[3] +
+                    "&salary=" + param[4] +
+                    "&email=" + param[5] +
+                    "&telephone=" + param[6] +
+                    "&department=" + param[7];
+        } else return "errorupload";
 
     }
 
