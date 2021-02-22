@@ -32,18 +32,8 @@ public class EmployeeDataBaseController {
 
 
     @GetMapping("/addemployee")
-    public String addEmployeeGet(
-            @RequestParam(name = "firstname", required = false, defaultValue = "") String firstName,
-            @RequestParam(name = "middlename", required = false, defaultValue = "") String middleName,
-            @RequestParam(name = "lastname", required = false, defaultValue = "") String lastName,
-            @RequestParam(name = "age", required = false, defaultValue = "0") int age,
-            @RequestParam(name = "salary", required = false, defaultValue = "0") int salary,
-            @RequestParam(name = "email", required = false, defaultValue = "") String email,
-            @RequestParam(name = "telephone", required = false, defaultValue = "") String telephone,
-            @RequestParam(name = "department", required = false, defaultValue = "") String department,
-            Model model) {
-
-        model.addAttribute("employee", new Employee(firstName, middleName, lastName, age, salary, email, telephone, department));
+    public String addEmployeeGet(Model model) {
+model.addAttribute("employee", new Employee());
         return "addemployee";
     }
 
@@ -78,7 +68,7 @@ public class EmployeeDataBaseController {
 
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) throws IOException {
+    public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Model model) throws IOException {
 
         if (file.isEmpty()) {
             attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -96,15 +86,9 @@ public class EmployeeDataBaseController {
         System.out.println(textBuilder.toString());
         String[] param = textBuilder.toString().split("\\|");
         if (param.length == 8) {
-            return "redirect:/addemployee?" +
-                    "firstname=" + param[0] +
-                    "&middlename=" + param[1] +
-                    "&lastname=" + param[2] +
-                    "&age=" + param[3] +
-                    "&salary=" + param[4] +
-                    "&email=" + param[5] +
-                    "&telephone=" + param[6] +
-                    "&department=" + param[7];
+            model.addAttribute("employee", new Employee(param[0], param[1], param[2], Integer.parseInt(param[3]), Integer.parseInt(param[4]), param[5], param[6], param[7]));
+
+            return "addemployee";
         } else return "errorupload";
 
     }
